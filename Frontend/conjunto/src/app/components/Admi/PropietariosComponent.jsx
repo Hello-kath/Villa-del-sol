@@ -78,10 +78,10 @@ const OwnersList = () => {
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <div className="flex gap-3">
-                                        <button className="text-blue-600 hover:text-blue-900">
+                                        <button className="text-[#6c757d] hover:text-[#212529]">
                                             <Pen className="w-5 h-5" />
                                         </button>
-                                        <button className="text-red-600 hover:text-red-900">
+                                        <button className="text-[#c32f27] hover:text-red-900">
                                             <Trash2 className="w-5 h-5" />
                                         </button>
                                     </div>

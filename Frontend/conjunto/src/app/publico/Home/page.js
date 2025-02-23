@@ -31,7 +31,7 @@ export default function Home() {
                 </div>
             </section>
             {/* contenedor de conocenos */}
-            <section class=" h-[calc(100vh-60px)] w-full overflow-y-auto overflow-hidden pt-4 px-3">
+            <section id="conocenos" class=" h-[calc(100vh-60px)] w-full overflow-y-auto overflow-hidden pt-4 px-3">
                 <div className=''>
                     <h1 className={`${unna.className} text-center font-light text-3xl py-4`} >Ofrecemos una variedad de zonas y servicios como:</h1>
                     <div className="bg-[url('/svg/fondo.svg')] h-72 w-full flex px-[25%] relative z-0">
@@ -66,7 +66,7 @@ export default function Home() {
                 </div>
             </section>
             {/* contenedor de servicios*/}
-            <section class="h-[calc(100vh-78px)] w-full overflow-y-auto overflow-hidden p-4 ">
+            <section id="servicios" class="h-[calc(100vh-78px)] w-full overflow-y-auto overflow-hidden p-4 ">
                 <div className=''>
                     <div className="bg-[url('/svg/fondo.svg')] h-[323px] w-full flex justify-center gap-32 z-0">
                         <img src="/svg/gym.svg" alt="foto SVG" className="h-full " />
@@ -92,12 +92,42 @@ export default function Home() {
                 </div>
             </section>
             {/* contenedor de reglamento*/}
-            <div class="bg-yellow-400 h-[calc(100vh-73px)] w-full overflow-y-auto overflow-hidden p-4">
+            <section id="reglamento" class="h-[calc(100vh-73px)] w-full overflow-y-auto overflow-hidden ">
                 <h1 className={`${unna.className} text-center font-light text-3xl py-1`}>MANUAL-DE-CONVIVENCIA</h1>
-                    <div>
-                        
+                <div className="bg-[url('/img/casapiscina.png')] bg-no-repeat bg-[length:100%_auto] bg-[center_top_40%] h-[82%] flex items-center justify-center">
+                    <div className='bg-[#364E67] rounded-sm bg-opacity-55 h-[75%] w-[38%] p-7'> 
+                        <p className= {`${nunito.className} text-white text-base `}>
+                        El reglamento de Villa del Sol es básicamente nuestra guía para mantener la buena convivencia en el conjunto. En él se explican las reglas para el uso de las áreas comunes, las responsabilidades que tenemos como vecinos y las medidas que nos ayudan a vivir en un espacio seguro y organizado.
+                        Si alguna vez tienes dudas o necesitas recordarlas, solo tienes que hacer clic en el ícono de archivo para acceder al reglamento completo en PDF.
+                        </p>
+                        <a href="https://www.sierrasdelesteph.com/wordpress/wp-content/uploads/2016/03/MANUAL_SIERRAS_DEL_ESTE.pdf" className="flex flex-col items-center gap-2 ml-15 mt-6">
+                            <img src="/iconos/archivo.svg" alt="WhatsApp" className="w-10 h-10" />
+                            <span className={`${nunito.className} text-white text-sm font-light `}>Ver manual</span>
+                        </a>
                     </div>
-            </div>
+                </div>
+                {/* contiene el footer */}
+                <div className= "bg-[url('/svg/fondo.svg')] pl-[330px] pt-2 h-[57px]">
+                    <section className={` ${amiri.className} w-2/3 h-10 flex gap-36`}>
+                        <a href="#" className="flex items-center gap-2 ">
+                            <img src="/iconos/Whatsap.svg" alt="WhatsApp" className="w-8 h-8" />
+                            <span className="-mt-2">3135037822</span>
+                        </a>
+
+                        <a href="#" className="flex items-center gap-2 ">
+                            <img src="/iconos/instagram.svg" alt="WhatsApp" className="w-7 h-7" />
+                            <span className="-mt-2">StateVilladelSol</span>
+                        </a>
+
+                        <a href="#" className="flex items-center gap-2">
+                            <img src="/iconos/gmail.svg" alt="WhatsApp" className="w-7 h-7" />
+                            <span className="-mt-2">villadelsol@gmail.com</span>
+                        </a>
+
+                    </section>
+                </div>
+
+            </section>
         </main>
 
     )

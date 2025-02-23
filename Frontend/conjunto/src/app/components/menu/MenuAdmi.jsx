@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { unna, amiri, poppinis } from '../../utils/fonts.js'
 
+
+
 const SidebarAdmi = () => {
     const [isOpen, setIsOpen] = useState(false); // Estado para controlar la visibilidad del menú
 
@@ -46,28 +48,33 @@ const SidebarAdmi = () => {
                 </section>
 
                 {/* Contenido del menú */}
-                <ul className= {`${poppinis.className} text-sm px-10 pt-2 flex-col justify-center items-center `}>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                <ul className={`${poppinis.className} text-sm px-10 pt-2 flex-col justify-center items-center`}>
+                    <li onClick={() => window.location.href = '/admin/ApartamentosPage/'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
                         <img src="/iconos/apartamento.svg" alt="Icono apartamento" className="w-5 h-5 mr-2" />
-                        Apartamentos</li>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
-                        <img src="/iconos/user.svg" alt="Icono apartamento" className="w-5 h-5 mr-2" />
-                        Propietario</li>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
-                        <img src="/iconos/usuarios.svg" alt="Icono apartamento" className="w-5 h-6 mr-2" />
-                        Visitantes</li>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
-                        <img src="/iconos/finanza.svg" alt="Icono apartamento" className="w-5 h-5 mr-2" />
-                        Gestión Financiera</li>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
-                        <img src="/iconos/solicitud.svg" alt="Icono apartamento" className="w-5 h-5 mr-2" />
-                        Solicitudes</li>
+                        Apartamentos
+                    </li>
+                    <li onClick={() => window.location.href = '/admin/PropietariosPage/'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                        <img src="/iconos/user.svg" alt="Icono propietario" className="w-5 h-5 mr-2" />
+                        Propietario
+                    </li>
+                    <li onClick={() => window.location.href = '/admin/VisitantesPage/'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                        <img src="/iconos/usuarios.svg" alt="Icono visitantes" className="w-5 h-6 mr-2" />
+                        Historial de Visitas
+                    </li>
+                    <li onClick={() => window.location.href = '/admin/FinanzasPage/'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                        <img src="/iconos/finanza.svg" alt="Icono gestión financiera" className="w-5 h-5 mr-2" />
+                        Gestión Financiera
+                    </li>
+                    <li onClick={() => window.location.href = '/admin/SolicitudesChatPage/'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                        <img src="/iconos/solicitud.svg" alt="Icono solicitudes" className="w-5 h-5 mr-2" />
+                        Solicitudes
+                    </li>
                 </ul>
 
                 <section className='flex items-center'>
                     <img src="/svg/planta1.svg" alt="Icono apartamento" className="w-16 mr-2" />
-                    <a href="/publico/recuperarPassword" className="text-sm font-medium flex text-black hover:text-[#faa307]">
-                    <img src="/iconos/salir.svg" alt="Icono apartamento" className="w-5 h-5 ml-5 mr-2" />
+                    <a href="/conjunto/src/app/publico/inicio/page.js" className="text-sm font-medium flex text-black hover:text-[#faa307]">
+                        <img src="/iconos/salir.svg" alt="Icono apartamento" className="w-5 h-5 ml-5 mr-2" />
                         Cerrar sesión
                     </a>
                 </section>

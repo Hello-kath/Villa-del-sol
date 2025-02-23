@@ -1,8 +1,10 @@
-import React from 'react';
-import { Pen, Trash2, Plus } from 'lucide-react';
+"use client";
+import React, { useState } from 'react';
+import { Pen, Trash2, Plus,  X  } from 'lucide-react';
+import { unna, amiri, poppinis, nunito } from '../../utils/fonts.js'
 
 const ApartmentList = () => {
-    const apartments = [
+    const [apartments, setApartments] = useState([
         {
             direccion: '12A',
             habitaciones: 'sofiaurbano@gmail.com',
@@ -20,21 +22,51 @@ const ApartmentList = () => {
             cc: '02/03/2023',
             telefono: '02/03/2023',
             estado: 'Desocupado'
-        },
-        // ... más datos de ejemplo
-    ];
+        }
+    ]);
+    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        direccion: '',
+        habitaciones: '',
+        propietario: '',
+        apellido: '',
+        cc: '',
+        telefono: '',
+        estado: 'Desocupado'
+    }); 
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setApartments([...apartments, formData]);
+        setFormData({
+            direccion: '',
+            habitaciones: '',
+            propietario: '',
+            apellido: '',
+            cc: '',
+            telefono: '',
+            estado: 'Desocupado'
+        });
+        setIsModalOpen(false);
+    };
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-semibold text-gray-800">Lista de apartamentos</h1>
-                <button className="bg-yellow-300 hover:bg-yellow-400 text-black px-6 py-2 rounded-lg flex items-center gap-2">
+        /* este contiene toda la lista  */
+        <section className=" container mx-auto px-4 py-14">
+            {/* contiene el titulo y boton para registrar un nuevo apartamento */}
+            <section className="flex justify-between items-center mb-8">
+                <h1 className={`${unna.className} text-3xl pl-[40%]  font-light text-black`}>Lista de apartamentos</h1>
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="bg-[#ffc300] hover:bg-[#e37902] text-white px-3 py-2 rounded-lg flex items-center gap-2">
                     <Plus className="w-5 h-5" />
-                    Registrar un apartamento
+                    Registrar
                 </button>
-            </div>
+            </section>
 
-            <div className="bg-white rounded-lg shadow overflow-x-auto">
+            {/* lista */}
+            <section className="bg-white rounded-lg shadow overflow-x-auto">
                 <table className="min-w-full table-auto">
                     <thead className="bg-gray-50">
                         <tr>
@@ -87,18 +119,18 @@ const ApartmentList = () => {
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                    ${apartment.estado === 'Ocupado' ? 'bg-green-100 text-green-800' :
-                                            apartment.estado === 'Desocupado' ? 'bg-red-100 text-red-800' :
+                    ${apartment.estado === 'Ocupado' ? 'bg-opacity-50 text-[#52b788]' :
+                                            apartment.estado === 'Desocupado' ? ' text-[#bf0603]' :
                                                 'bg-yellow-100 text-yellow-800'}`}>
                                         {apartment.estado}
                                     </span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <div className="flex gap-3">
-                                        <button className="text-blue-600 hover:text-blue-900">
+                                        <button className="text-[#6c757d] hover:text-[#212529]">
                                             <Pen className="w-5 h-5" />
                                         </button>
-                                        <button className="text-red-600 hover:text-red-900">
+                                        <button className="text-[#c32f27] hover:text-red-900">
                                             <Trash2 className="w-5 h-5" />
                                         </button>
                                     </div>
@@ -107,8 +139,109 @@ const ApartmentList = () => {
                         ))}
                     </tbody>
                 </table>
-            </div>
-        </div>
+            </section>
+
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
+                        <div className="flex justify-between items-center mb-4">
+                            <h2 className="text-xl font-bold">Registrar nuevo apartamento</h2>
+                            <button onClick={() => setIsModalOpen(false)} className="text-gray-500 hover:text-gray-700">
+                                <X className="w-6 h-6" />
+                            </button>
+                        </div>
+
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">Dirección</label>
+                                    <input
+                                        type="text"
+                                        className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
+                                        value={formData.direccion}
+                                        onChange={(e) => setFormData({ ...formData, direccion: e.target.value })}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">N° habitaciones</label>
+                                    <input
+                                        type="text"
+                                        className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
+                                        value={formData.habitaciones}
+                                        onChange={(e) => setFormData({ ...formData, habitaciones: e.target.value })}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">Nombre del propietario</label>
+                                    <input
+                                        type="text"
+                                        className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
+                                        value={formData.propietario}
+                                        onChange={(e) => setFormData({ ...formData, propietario: e.target.value })}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">Apellido</label>
+                                    <input
+                                        type="text"
+                                        className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
+                                        value={formData.apellido}
+                                        onChange={(e) => setFormData({ ...formData, apellido: e.target.value })}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">CC</label>
+                                    <input
+                                        type="text"
+                                        className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
+                                        value={formData.cc}
+                                        onChange={(e) => setFormData({ ...formData, cc: e.target.value })}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">Teléfono</label>
+                                    <input
+                                        type="text"
+                                        className="mt-1 block w-full  shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
+                                        value={formData.telefono}
+                                        onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700">Estado</label>
+                                    <select
+                                        className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
+                                        value={formData.estado}
+                                        onChange={(e) => setFormData({ ...formData, estado: e.target.value })}
+                                    >
+                                        <option value="Desocupado">Desocupado</option>
+                                        <option value="Ocupado">Ocupado</option>
+                                        <option value="En mantenimiento">En mantenimiento</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-end gap-4 mt-6">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsModalOpen(false)}
+                                    className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                                >
+                                    Cancelar
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="px-4 py-2 bg-[#ffc300] hover:bg-[#e37902] text-white rounded-md"
+                                >
+                                    Guardar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+        </section>
     );
 };
 
