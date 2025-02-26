@@ -7,7 +7,7 @@ import SidebarResidente from '../../components/menu/MenuResidente';
 
 
 const Menu = () => {
-    const [rol, setRol] = useState('admi'); // Rol por defecto
+    const [rol, setRol] = useState('propietario'); // Rol por defecto
     const [componente, setComponente] = useState(null);
 
     useEffect(() => {
