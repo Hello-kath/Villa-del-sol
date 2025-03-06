@@ -109,7 +109,7 @@ export default function IniciarSesion() {
                         {error}
                     </div>
                 )}
-
+ 
                 <form onSubmit={handleSubmit} className="w-auto h-auto flex flex-col ml-8 mr-5 mt-20 gap-4">
                     <input
                         type="email"

@@ -124,7 +124,7 @@ export default function RegistroResidente() {
         } else {
             alert("Confirma tu correo para completar el registro.");
             console.log("Registro exitoso:", result);
-            router.push("/publico/iniciarSesion");
+            
         }
     };
 
@@ -188,7 +188,8 @@ export default function RegistroResidente() {
                     >
                         <option value="" hidden>Seleccione la relación</option>
                         <option value="familiar">Familiar</option>
-                        <option value="arrendador">Arrendador</option>
+                        <option value="inquilino">Arrendador</option>
+                        <option value="otro">otro</option>
                     </select>
                     <ContraseñaInput
                         id="contraseña"

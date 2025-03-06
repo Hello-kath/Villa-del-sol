@@ -44,7 +44,7 @@ const registrarPropietario = async (req, res) => {
         await apartamento.save();
 
         // Generar un token para la verificación
-        const token = jwt.sign({ id: nuevoPropietario.idPropietario }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: nuevoPropietario.idPropietario }, process.env.JWT_SECRET, );
 
         // Configurar el envío de correo
         const transporter = nodemailer.createTransport({
@@ -92,7 +92,67 @@ const verificarCorreo = async (req, res) => {
     }
 };
 
+// listar los propietarios existentes con la información específica
+const listarPropietarios = async (req, res) => {
+    try {
+        const propietarios = await Propietario.findAll({
+            attributes: ['email', 'nombre', 'apellido', 'cc', 'telefono', 'direccionVivienda']
+        });
+        res.status(200).json({ propietarios });
+    } catch (error) {
+        console.error("Error al listar propietarios:", error);
+        res.status(500).json({
+            error: "Error interno del servidor",
+            details: error.message
+        });
+    }
+};
+
+// editar un propietario
+const editarPropietario = async (req, res) => {
+    const { id } = req.params;
+    const { email, nombre, apellido, cc, telefono, rol, sexo, direccionVivienda, contraseña } = req.body;
+
+    try {
+        const propietario = await Propietario.findByPk(id);
+        if (!propietario) return res.status(404).json({ error: "Propietario no encontrado" });
+
+        await propietario.update({ email, nombre, apellido, cc, telefono, rol, sexo, direccionVivienda, contraseña });
+
+        const propietarioActualizado = await Propietario.findByPk(id, {
+            include: { model: Apartamento, as: 'apartamentos' }
+        });
+
+        res.status(200).json({ mensaje: "Propietario actualizado", propietario: propietarioActualizado });
+    } catch (error) {
+        console.error("Error al editar el propietario:", error);
+        res.status(500).json({ error: "Error interno del servidor", details: error.message });
+    }
+};
+
+// eliminar un propietario
+const eliminarPropietario = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const propietario = await Propietario.findByPk(id);
+        if (!propietario) return res.status(404).json({ error: "Propietario no encontrado" });
+
+        await propietario.destroy();
+
+        res.status(200).json({ mensaje: "Propietario eliminado" });
+    } catch (error) {
+        console.error("Error al eliminar el propietario:", error);
+        res.status(500).json({ error: "Error interno del servidor", details: error.message });
+    }
+};
+
+
 module.exports = {
     registrarPropietario,
-    verificarCorreo
+    verificarCorreo,
+    listarPropietarios,
+    editarPropietario,
+    eliminarPropietario
+
 };

@@ -6,6 +6,11 @@ const nodemailer = require('nodemailer');
 const registrarResidente = async (req, res) => {
     const { email, nombre, apellido, cc, relacion, propietarioId, contraseña, confirmarContraseña } = req.body;
 
+    console.log('JWT_SECRET:', process.env.JWT_SECRET);
+    console.log('EMAIL:', process.env.EMAIL);
+    console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD);
+    console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
+
     try {
         // Validar que las contraseñas coincidan
         if (contraseña !== confirmarContraseña) {
@@ -35,7 +40,7 @@ const registrarResidente = async (req, res) => {
         });
 
         // Generar un token de verificación para el residente
-        const token = jwt.sign({ id: nuevoResidente.idResidente }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: nuevoResidente.idResidente }, process.env.JWT_SECRET,);
 
         // Configurar el envío de correo de verificación
         const transporter = nodemailer.createTransport({

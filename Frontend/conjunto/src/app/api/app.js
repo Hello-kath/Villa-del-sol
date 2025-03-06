@@ -21,9 +21,12 @@ const apartamentoRoutes = require('./rutas/Admi/ApartamentoRutas')
 const propietarioRoutes = require('./rutas/Propietario/RegistrarseRutas')
 const iniciarSesionRoutes = require('./rutas/InicioSesion/inicioSesionRutas.js')
 const RegistrarResidente = require('./rutas/Residente/RegistroRutas.js')
+const RegistrarAdmi = require('./rutas/Admi/RegistroRutas.js')
+const Visitante = require('./rutas/Visitas/VisitaRutas')
 
 //Rutas Admi
 app.use('/api', apartamentoRoutes); 
+app.use('/api/registro', RegistrarAdmi); 
 
 //Rutas propietario
 app.use('/api/propietarios', propietarioRoutes);
@@ -34,6 +37,8 @@ app.use('/api/iniciarSesion', iniciarSesionRoutes);
 //Registrar un residente
 app.use('/api/registrar', RegistrarResidente);
 
+//Registrar de visitante
+app.use('/api/visita', Visitante);
 
 // Probar la conexión a la base de datos
 sequelize.authenticate()

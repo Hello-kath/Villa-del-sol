@@ -1,4 +1,4 @@
-const { Apartamento, Propietario } = require('../../models');
+const { Visitante} = require('../../models');
 
 //este permite registrar un apartamento
 const RegistrarApt = async (req, res) => {
@@ -63,56 +63,9 @@ const listarApartamentos = async (req, res) => {
 };
 
 
-//editar un apartamento
-const editarApartamento = async (req, res) => {
-    const { id } = req.params;
-    const { direccion, numHabitaciones, estado, idPropietario } = req.body;
-
-    try {
-        const apartamento = await Apartamento.findByPk(id);
-        if (!apartamento) return res.status(404).json({ error: "Apartamento no encontrado" });
-
-        if (idPropietario) {
-            const propietario = await Propietario.findByPk(idPropietario);
-            if (!propietario) return res.status(404).json({ error: "Propietario no encontrado" });
-            apartamento.idPropietario = idPropietario;
-        }
-
-        await apartamento.update({ direccion, numHabitaciones, estado });
-
-        const apartamentoActualizado = await Apartamento.findByPk(id, {
-            include: { model: Propietario, as: 'propietario', attributes: ['nombre', 'apellido', 'cc', 'telefono'] }
-        });
-
-        res.status(200).json({ mensaje: "Apartamento actualizado", apartamento: apartamentoActualizado });
-    } catch (error) {
-        console.error("Error al editar el apartamento:", error);
-        res.status(500).json({ error: "Error interno del servidor", details: error.message });
-    }
-};
-
-
-// eliminar un apartamento
-const eliminarApartamento = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const apartamento = await Apartamento.findByPk(id);
-        if (!apartamento) return res.status(404).json({ error: "Apartamento no encontrado" });
-
-        await apartamento.destroy();
-
-        res.status(200).json({ mensaje: "Apartamento eliminado" });
-    } catch (error) {
-        console.error("Error al eliminar el apartamento:", error);
-        res.status(500).json({ error: "Error interno del servidor", details: error.message });
-    }
-};
 
 module.exports = {
     RegistrarApt,
-    listarApartamentos,
-    editarApartamento,
-    eliminarApartamento
+    listarApartamentos
 };
 
