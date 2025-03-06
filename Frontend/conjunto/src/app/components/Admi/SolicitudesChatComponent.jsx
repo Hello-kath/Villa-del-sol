@@ -1,7 +1,7 @@
 import React from 'react';
 import { Send, MessageSquare } from 'lucide-react';
 
-const ChatInterface = () => {
+const SolicitudChat = () => {
     return (
         <section className="flex h-[87vh] pt-2 px-7">
             {/* Sidebar */}
@@ -90,4 +90,4 @@ const ChatInterface = () => {
     );
 };
 
-export default ChatInterface;
+export default SolicitudChat;

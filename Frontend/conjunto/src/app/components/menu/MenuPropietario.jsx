@@ -47,23 +47,23 @@ const SidebarPropietario = () => {
 
                 {/* Contenido del menú */}
                 <ul className= {`${poppinis.className} text-sm px-10 pt-2 flex-col justify-center items-center `}>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                    <li onClick={() => window.location.href = '/propietario/ListaResidente/'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
                         <img src="/iconos/newUser.svg" alt="Icono apartamento" className="w-5 h-5 mr-2" />
                         Registrar un Residente</li>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                    <li onClick={() => window.location.href = '/propietario/HistorialVisitas'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
                         <img src="/iconos/historial.svg" alt="Icono apartamento" className="w-5 h-5 mr-2" />
                         Historial de visitantes</li>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                    <li onClick={() => window.location.href = '/propietario/HistorialPagos'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
                         <img src="/iconos/finanza.svg" alt="Icono apartamento" className="w-5 h-6 mr-2" />
                         Pagos  administración</li>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                    <li onClick={() => window.location.href = '/propietario/SolicitudChat'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
                         <img src="/iconos/solicitud.svg" alt="Icono apartamento" className="w-5 h-5 mr-2" />
-                        Hacer una solicitudes</li>
+                        Hacer una solicitud</li>
                 </ul>
 
                 <section className='flex items-center'>
                     <img src="/svg/planta1.svg" alt="Icono apartamento" className="w-16 mr-2" />
-                    <a href="/publico/recuperarPassword" className="text-sm font-medium flex text-black hover:text-[#faa307]">
+                    <a href="/publico/inicio/" className="text-sm font-medium flex text-black hover:text-[#faa307]">
                     <img src="/iconos/salir.svg" alt="Icono apartamento" className="w-5 h-5 ml-5 mr-2" />
                         Cerrar sesión
                     </a>

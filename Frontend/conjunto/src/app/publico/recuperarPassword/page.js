@@ -1,6 +1,6 @@
 import { unna, amiri, poppinis } from '../../utils/fonts.js'
 
-import ContraseñaInput from '../../components/ContraseñaInput';
+import ContraseñaInput from '../../components/PasswordInput.jsx';
 
 export default function recuperarPassword() {
     return (

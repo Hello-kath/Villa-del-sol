@@ -15,13 +15,17 @@ export default function RootLayout({ children }) {
   const paginasConFondo = [
     '/publico/registrarse',
     '/publico/iniciarSesion',
-    '/publico/recuperarPassword'
+    '/publico/recuperarPassword',
+    '/propietario/RegistrarResidente'
   ];
 
   // Determinar si se debe aplicar fondo o no
   const aplicarFondo = paginasConFondo.includes(pathname);
   // Determinar si se debe mostrar el header o no
-  const mostrarHeader = pathname !== '/' && pathname !== '/publico/inicio';
+  const mostrarHeader = 
+  pathname !== '/' && pathname !== '/publico/inicio' 
+  && pathname !== '/propietario/RegistrarResidente'
+  && pathname !== '/RegistrarVisitaPage';
 
   return (
     <html lang="es">

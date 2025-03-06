@@ -1,5 +1,6 @@
+"use client"
 import '../../globals.css';
-import { unna, amiri, poppinis } from '../../utils/fonts'
+import { unna, amiri, poppinis } from '../../utils/fonts';
 import Link from "next/link";
 
 // pages/inicio.js
@@ -9,8 +10,11 @@ export default function Inicio() {
             {/* encabezado */}
             <header className=" w-full h-[10vh] sm:h-[10vh] md:h-[10vh] lg:h-[11vh] pt-5">
                 <nav className="text-center flex justify-end">
+                    <button onClick={() => window.location.href = '/RegistrarVisitaPage'} className={`${poppinis.className}  bg-white text-white w-[9%]  mr-20  rounded-lg px-1 py-2 text-sm transition duration-300 hover:!bg-white hover:!text-orange-500`}>
+                        visitante
+                    </button>
                     <Link href="/publico/iniciarSesion" className='contents'>
-                    <button className={`${poppinis.className} bg-[#FDD078] text-white w-[9%]  ml-64 shadow-md rounded-lg px-1 py-2 text-sm transition duration-300 hover:!bg-white hover:!text-orange-500`}>
+                    <button className={`${poppinis.className} bg-[#FDD078] text-white w-[9%]  shadow-md rounded-lg px-1 py-2 text-sm transition duration-300 hover:!bg-white hover:!text-orange-500`}>
                         Iniciar sesión
                     </button>
                     </Link>

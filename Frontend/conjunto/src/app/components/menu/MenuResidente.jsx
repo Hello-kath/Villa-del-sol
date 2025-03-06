@@ -47,17 +47,17 @@ const SidebarResidente = () => {
 
                 {/* Contenido del menú */}
                 <ul className= {`${poppinis.className} text-sm px-10 pt-2 flex-col justify-center items-center `}>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                    <li onClick={() => window.location.href = '/residente/HistorialVisitas/'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
                         <img src="/iconos/historial.svg" alt="Icono apartamento" className="w-5 h-5 mr-2" />
                         Historial de visitantes</li>
-                    <li className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
+                    <li  onClick={() => window.location.href = '/residente/SolicitudChat'} className="p-3 hover:bg-[#fcedd4] cursor-pointer flex">
                         <img src="/iconos/solicitud.svg" alt="Icono apartamento" className="w-5 h-5 mr-2" />
                         Hacer una solicitudes</li>
                 </ul>
 
                 <section className='flex items-center'>
                     <img src="/svg/planta1.svg" alt="Icono apartamento" className="w-24 mt-16" />
-                    <a href="/publico/recuperarPassword" className="text-sm font-medium mt-52 mr-10 flex text-black hover:text-[#faa307]">
+                    <a href="/publico/inicio/" className="text-sm font-medium mt-52 mr-10 flex text-black hover:text-[#faa307]">
                     <img src="/iconos/salir.svg" alt="Icono apartamento" className="w-5 h-5 mr-2" />
                         Cerrar sesión
                     </a>

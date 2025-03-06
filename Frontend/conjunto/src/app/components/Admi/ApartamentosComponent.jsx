@@ -1,7 +1,30 @@
 "use client";
 import React, { useState } from 'react';
-import { Pen, Trash2, Plus,  X  } from 'lucide-react';
+import { Pen, Trash2, Plus, X } from 'lucide-react';
 import { unna, amiri, poppinis, nunito } from '../../utils/fonts.js'
+
+//conexion con el backend 
+const registrarApartamento = async (data) => {
+    try {
+        const res = await fetch("http://localhost:3002/api/registrarApt", { // Conectar al endpoint del backend
+            method: "POST", // Método HTTP
+            headers: {
+                "Content-Type": "application/json", // Encabezado indicando formato JSON
+            },
+            body: JSON.stringify(data), // Convertir datos a JSON para enviarlos en la solicitud
+            cache: "no-store", // Evitar almacenamiento en caché
+        });
+
+        if (!res.ok) { // Verificar si la conexión fue exitosa
+            throw new Error("Error al registrar el apartamento"); // Error si el endpoint falla
+        }
+
+        return res.json(); // Retornar respuesta en formato JSON
+    } catch (error) {
+        console.log("Error al registrar el apartamento: ", error); // Mostrar error en la consola
+    }
+};
+
 
 const ApartmentList = () => {
     const [apartments, setApartments] = useState([
@@ -24,32 +47,54 @@ const ApartmentList = () => {
             estado: 'Desocupado'
         }
     ]);
-    
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         direccion: '',
         habitaciones: '',
-        propietario: '',
-        apellido: '',
-        cc: '',
-        telefono: '',
         estado: 'Desocupado'
-    }); 
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setApartments([...apartments, formData]);
+
+    const [error, setError] = useState(""); // Define el estado para errores
+    const [mensaje, setMensaje] = useState("") 
+
+    const handleSubmit = async (e) => {
+    e.preventDefault(); // Evita que la página se recargue al enviar el formulario
+
+    try {
+        // Limpia estados previos
+        setError('');
+        setMensaje('');
+
+        // Validación básica: verificar que no haya campos vacíos
+        if (!formData.direccion || !formData.habitaciones || !formData.estado) {
+            setError("Todos los campos son obligatorios.");
+            return;
+        }
+
+        // Envía los datos del formulario al backend
+        const response = await registrarApartamento({
+            direccion: formData.direccion,
+            numHabitaciones: parseInt(formData.habitaciones, 10), // Asegura que sea un número
+            estado: formData.estado,
+        });
+
+        // Si la solicitud fue exitosa
+        setMensaje(response.message); // Muestra mensaje de éxito
         setFormData({
             direccion: '',
             habitaciones: '',
-            propietario: '',
-            apellido: '',
-            cc: '',
-            telefono: '',
-            estado: 'Desocupado'
+            estado: 'Desocupado', // Resetea los valores a predeterminados
         });
-        setIsModalOpen(false);
-    };
+        setIsModalOpen(false); // Cierra el modal después de guardar
+    } catch (err) {
+        // Manejo de errores
+        setError(err.message || "Error al registrar el apartamento");
+    }
+};
+
+    
 
     return (
         /* este contiene toda la lista  */
@@ -142,8 +187,8 @@ const ApartmentList = () => {
             </section>
 
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
+                <main className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <section className="bg-white rounded-lg p-6 w-full max-w-2xl">
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-xl font-bold">Registrar nuevo apartamento</h2>
                             <button onClick={() => setIsModalOpen(false)} className="text-gray-500 hover:text-gray-700">
@@ -157,6 +202,7 @@ const ApartmentList = () => {
                                     <label className="block text-sm font-medium text-gray-700">Dirección</label>
                                     <input
                                         type="text"
+                                        name="direccion"
                                         className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
                                         value={formData.direccion}
                                         onChange={(e) => setFormData({ ...formData, direccion: e.target.value })}
@@ -166,62 +212,29 @@ const ApartmentList = () => {
                                     <label className="block text-sm font-medium text-gray-700">N° habitaciones</label>
                                     <input
                                         type="text"
+                                        name="habitaciones"
                                         className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
                                         value={formData.habitaciones}
                                         onChange={(e) => setFormData({ ...formData, habitaciones: e.target.value })}
                                     />
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Nombre del propietario</label>
-                                    <input
-                                        type="text"
-                                        className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
-                                        value={formData.propietario}
-                                        onChange={(e) => setFormData({ ...formData, propietario: e.target.value })}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Apellido</label>
-                                    <input
-                                        type="text"
-                                        className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
-                                        value={formData.apellido}
-                                        onChange={(e) => setFormData({ ...formData, apellido: e.target.value })}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">CC</label>
-                                    <input
-                                        type="text"
-                                        className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
-                                        value={formData.cc}
-                                        onChange={(e) => setFormData({ ...formData, cc: e.target.value })}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Teléfono</label>
-                                    <input
-                                        type="text"
-                                        className="mt-1 block w-full  shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
-                                        value={formData.telefono}
-                                        onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                                    />
-                                </div>
+
+
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700">Estado</label>
                                     <select
+                                        name="estado"
                                         className="mt-1 block w-full shadow-sm border-b-2 border-[#FF8800] focus:outline-none"
                                         value={formData.estado}
                                         onChange={(e) => setFormData({ ...formData, estado: e.target.value })}
                                     >
                                         <option value="Desocupado">Desocupado</option>
-                                        <option value="Ocupado">Ocupado</option>
                                         <option value="En mantenimiento">En mantenimiento</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div className="flex justify-end gap-4 mt-6">
+                            <section className="flex justify-end gap-4 mt-6">
                                 <button
                                     type="button"
                                     onClick={() => setIsModalOpen(false)}
@@ -235,10 +248,10 @@ const ApartmentList = () => {
                                 >
                                     Guardar
                                 </button>
-                            </div>
+                            </section>
                         </form>
-                    </div>
-                </div>
+                    </section>
+                </main>
             )}
 
         </section>

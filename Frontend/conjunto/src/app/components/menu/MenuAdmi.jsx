@@ -73,7 +73,7 @@ const SidebarAdmi = () => {
 
                 <section className='flex items-center'>
                     <img src="/svg/planta1.svg" alt="Icono apartamento" className="w-16 mr-2" />
-                    <a href="/conjunto/src/app/publico/inicio/page.js" className="text-sm font-medium flex text-black hover:text-[#faa307]">
+                    <a href="/publico/inicio/" className="text-sm font-medium flex text-black hover:text-[#faa307]">
                         <img src="/iconos/salir.svg" alt="Icono apartamento" className="w-5 h-5 ml-5 mr-2" />
                         Cerrar sesión
                     </a>
